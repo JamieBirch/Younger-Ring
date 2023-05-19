@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : MonoBehaviour
+public class CharacterLocomotionManager : MonoBehaviour
 {
-    private void Awake()
+    protected virtual void Awake()
     {
-        DontDestroyOnLoad(this);
     }
 }
