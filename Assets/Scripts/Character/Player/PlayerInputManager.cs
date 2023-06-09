@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager instance;
+    public PlayerManager player;
     PlayerControls playerControls;
     
     [Header("Movement")]
@@ -104,6 +105,9 @@ public class PlayerInputManager : MonoBehaviour
         {
             moveAmount = 1;
         }
+        
+        // if not locked on target, only moving forward
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
     }
 
     private void HandleCameraMovementInput()
