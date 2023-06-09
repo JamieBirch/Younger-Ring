@@ -4,10 +4,10 @@ using Unity.Netcode;
 
 public class CharacterManager : NetworkBehaviour
 {
-    public CharacterController CharacterController;
-    [HideInInspector]public Animator animator;
+    [HideInInspector] public CharacterController CharacterController;
+    [HideInInspector] public Animator animator;
 
-    private CharacterNetworkManager _characterNetworkManager;
+    [HideInInspector] public CharacterNetworkManager _characterNetworkManager;
     protected virtual void Awake()
     {
         DontDestroyOnLoad(this);

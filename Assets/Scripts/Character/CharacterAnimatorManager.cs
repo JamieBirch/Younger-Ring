@@ -5,6 +5,10 @@ using UnityEngine;
 public class CharacterAnimatorManager : MonoBehaviour
 {
     private CharacterManager character;
+
+    public float horizontal;
+    public float vertical;
+    
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();

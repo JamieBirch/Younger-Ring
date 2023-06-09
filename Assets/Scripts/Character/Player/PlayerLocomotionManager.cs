@@ -22,6 +22,26 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
         _playerManager = GetComponent<PlayerManager>();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        if (_playerManager.IsOwner)
+        {
+            _playerManager._characterNetworkManager.animatorVerticalParameter.Value = verticalMovement;
+            _playerManager._characterNetworkManager.animatorHorizontalParameter.Value = horizontalMovement;
+            _playerManager._characterNetworkManager.networkMoveAmountParameter.Value = moveAmount;
+        }
+        else
+        {
+            verticalMovement = _playerManager._characterNetworkManager.animatorVerticalParameter.Value;
+            horizontalMovement = _playerManager._characterNetworkManager.animatorHorizontalParameter.Value;
+            moveAmount = _playerManager._characterNetworkManager.networkMoveAmountParameter.Value;
+            
+            _playerManager.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+        }
+    }
+
     public void HandleAllMovement()
     {
         HandleGroundedMovement();
@@ -32,6 +52,7 @@ public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         verticalMovement = PlayerInputManager.instance.verticalInput;
         horizontalMovement = PlayerInputManager.instance.horizontalInput;
+        moveAmount = PlayerInputManager.instance.moveAmount;
     }
 
     private void HandleGroundedMovement()
